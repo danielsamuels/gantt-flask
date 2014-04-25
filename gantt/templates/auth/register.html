@@ -1,0 +1,9 @@
+<form method="post" action="">
+    {{ form.hidden_tag() }}
+
+    {{ form.name.label }} {{ form.name(size=20) }}
+
+    <input type="submit" value="Go">
+</form>
+
+<p>Already got an account? <a href="/login">Login</a></p>

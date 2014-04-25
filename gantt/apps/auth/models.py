@@ -1,6 +1,8 @@
 from gantt.app import db
 from peewee import *
 
+from .helpers import get_random_string
+
 import datetime
 
 
@@ -31,6 +33,12 @@ class User(db.Model):
         default=datetime.datetime.now
     )
 
+    def new_session(self):
+        return Session.create(
+            user=self,
+            key=get_random_string(64)
+        )
+
 
 class Session(db.Model):
 
@@ -38,10 +46,12 @@ class Session(db.Model):
         User,
     )
 
-    value = CharField(
+    key = CharField(
 
     )
 
+    def get_user(self):
+        return self.user
 
 class Project(db.Model):
 
